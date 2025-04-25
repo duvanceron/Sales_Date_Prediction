@@ -1,6 +1,30 @@
 # SalesDatePrediction
+# 📈 Sales Date Prediction - Angular App
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.9.
+This is an Angular-based web application for predicting future sales dates based on historical data. The app provides an intuitive UI for data input, displays predictions, and visualizes trends for easier decision-making.
+
+## 🚀 Features
+
+- Upload or enter historical sales data
+- Predict future sales dates using integrated AI model/API
+- Interactive data visualization (charts & tables)
+- Responsive design for desktop and mobile
+- Built with Angular version 19.2.9.
+
+## 🛠️ Tech Stack
+
+- **Frontend**: Angular, TypeScript, HTML5, SCSS
+- **Charting**:
+- **Backend API** .NET
+
+## 📦 Installation
+
+1. **Clone the repository**
+
+```bash
+git clone https://github.com/yourusername/sales-date-prediction-angular.git
+cd sales-date-prediction-angular
+
 
 ## Development server
 
