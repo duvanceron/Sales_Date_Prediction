@@ -1,0 +1,62 @@
+<div class="searchDiv">
+  <label class="labelCustomer">Customers</label>
+  <mat-form-field appearance="fill" class="white-background">
+    <mat-label>Customer Name</mat-label>
+    <input
+      matInput
+      (keyup)="applyFilter($event)"
+      placeholder="Customer"
+      #input
+    />
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
+</div>
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" matSort>
+    <!-- ID Column -->
+    <ng-container matColumnDef="customerName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Customer</th>
+      <td mat-cell *matCellDef="let row">{{ row.customerName }}</td>
+    </ng-container>
+
+    <!-- Progress Column -->
+    <ng-container matColumnDef="lastOrderDate">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Last Order Date</th>
+      <td mat-cell *matCellDef="let row">{{ row.lastOrderDate | date }}</td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="nextPredictedOrder">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        Next Predicted Order
+      </th>
+      <td mat-cell *matCellDef="let row">
+        {{ row.nextPredictedOrder | date }}
+      </td>
+    </ng-container>
+
+    <!-- Actions -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Actions</th>
+      <td mat-cell *matCellDef="let row"  >
+        <a mat-button class="red-button" href="" target="_blank">VIEW ORDERS</a>
+        <a mat-button class="green-button" href="" target="_blank">NEW ORDER</a>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+    <!-- Row shown when there is no matching data. -->
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">
+        No data matching the filter "{{ input.value }}"
+      </td>
+    </tr>
+  </table>
+
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 25, 100]"
+    aria-label="Select page of users"
+  ></mat-paginator>
+</div>

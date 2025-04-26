@@ -1,0 +1,12 @@
+.example-spacer {
+  flex: 1 1 auto;
+}
+/* styles.css o component.css */
+.dark-toolbar {
+  background-color: #333; /* Gris oscuro */
+  color: white; /* Texto blanco para contraste */
+}
+.logo {
+  height: 70px;
+  margin-right: 16px;
+}

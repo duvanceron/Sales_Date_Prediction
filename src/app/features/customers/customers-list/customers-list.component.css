@@ -1,0 +1,48 @@
+table {
+  width: 100%;
+}
+
+.mat-mdc-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+td,
+th {
+  width: 25%;
+}
+
+.searchDiv {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.labelCustomer {
+  margin-left: 20px;
+  font-weight: bold;
+  font-size: 28px;
+}
+
+.white-background {
+  width: 600px;
+  background-color: white !important;
+}
+mat-label {
+  color: grey;
+}
+.red-button {
+  /* Material red */
+  color: red;
+  margin-right: 10px;
+  text-decoration: none;
+}
+
+
+.green-button {
+  /* Material green */
+  color: #4caf50;
+  margin-left: 10px;
+  text-decoration: none;
+}
