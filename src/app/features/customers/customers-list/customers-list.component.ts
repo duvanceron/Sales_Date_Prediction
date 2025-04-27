@@ -1,4 +1,11 @@
-import { AfterViewInit, OnInit, Component, ViewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  inject,
+  AfterViewInit,
+  OnInit,
+  Component,
+  ViewChild,
+} from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { CustomerService } from 'app/core/services/customer.service';
 import { CustomerDTO } from 'app/core/models/customerDTO';
@@ -9,6 +16,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { HttpClientModule } from '@angular/common/http';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { OrderDialogComponent } from 'app/features/dialogs/order-dialog/order-dialog.component';
 
 @Component({
   selector: 'app-customers-list',
@@ -21,26 +30,31 @@ import { HttpClientModule } from '@angular/common/http';
     MatSortModule,
     MatPaginatorModule,
     MatIconModule,
-    HttpClientModule
+    MatDialogModule,
+    HttpClientModule,
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './customers-list.component.html',
   styleUrl: './customers-list.component.css',
 })
-export class CustomersListComponent implements OnInit,AfterViewInit {
+export class CustomersListComponent implements OnInit, AfterViewInit {
   loading: boolean = true;
-  displayedColumns: string[] = ['customerName','lastOrderDate', 'nextPredictedOrder','actions'];
-
-  
+  displayedColumns: string[] = [
+    'custid',
+    'customerName',
+    'lastOrderDate',
+    'nextPredictedOrder',
+    'actions',
+  ];
+  readonly dialog = inject(MatDialog);
   dataSource = new MatTableDataSource<CustomerDTO>();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private customerService: CustomerService) {
-  }
+  constructor(private customerService: CustomerService) {}
   ngOnInit(): void {
     this.customerService.getCustomers().subscribe(
       (data) => {
-        console.log(data);
         this.dataSource.data = data;
         this.loading = false;
       },
@@ -60,6 +74,20 @@ export class CustomersListComponent implements OnInit,AfterViewInit {
 
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
+    }
+  }
+
+  openDialog(customerId: number) {
+    const customer = this.dataSource.data.find((c) => c.custid === customerId);
+
+    if (customer) {
+      const dialogRef = this.dialog.open(OrderDialogComponent, {
+        width: '90vw',
+        maxWidth: '90vw',
+        data: customer,
+      });
+
+      dialogRef.afterClosed().subscribe((result) => {});
     }
   }
 }
