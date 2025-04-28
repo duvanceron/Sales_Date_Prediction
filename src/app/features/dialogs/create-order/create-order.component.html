@@ -8,16 +8,16 @@
       <div class="row">
         <mat-form-field appearance="fill" class="field">
           <mat-label>Employee</mat-label>
-          <mat-select formControlName="employee">
-            <mat-option *ngFor="let emp of employees" [value]="emp">{{
-              emp
+          <mat-select formControlName="empid">
+            <mat-option *ngFor="let emp of employees" [value]="emp.id">{{
+              emp.name
             }}</mat-option>
           </mat-select>
         </mat-form-field>
 
         <mat-form-field appearance="fill" class="field">
           <mat-label>Shipper</mat-label>
-          <mat-select formControlName="shipper">
+          <mat-select formControlName="shipperid">
             <mat-option *ngFor="let ship of shippers" [value]="ship">{{
               ship
             }}</mat-option>
@@ -27,23 +27,23 @@
       <div class="row">
         <mat-form-field appearance="fill" class="field">
           <mat-label>Ship Name</mat-label>
-          <input matInput formControlName="shipName" required />
+          <input matInput formControlName="shipname" required />
         </mat-form-field>
       </div>
       <div class="row">
         <mat-form-field appearance="fill" class="field">
           <mat-label>Ship Address</mat-label>
-          <input matInput formControlName="shipAddress" />
+          <input matInput formControlName="shipaddress" />
         </mat-form-field>
 
         <mat-form-field appearance="fill" class="field">
           <mat-label>Ship City</mat-label>
-          <input matInput formControlName="shipCity" />
+          <input matInput formControlName="shipcity" />
         </mat-form-field>
 
         <mat-form-field appearance="fill" class="field">
           <mat-label>Ship Country</mat-label>
-          <input matInput formControlName="shipCountry" />
+          <input matInput formControlName="shipcountry" />
         </mat-form-field>
       </div>
       <div class="row">
@@ -52,7 +52,7 @@
           <input
             matInput
             [matDatepicker]="orderPicker"
-            formControlName="orderDate"
+            formControlName="orderdate"
           />
           <mat-datepicker-toggle
             matSuffix
@@ -66,7 +66,7 @@
           <input
             matInput
             [matDatepicker]="requiredPicker"
-            formControlName="requiredDate"
+            formControlName="requireddate"
           />
           <mat-datepicker-toggle
             matSuffix
@@ -80,7 +80,7 @@
           <input
             matInput
             [matDatepicker]="shippedPicker"
-            formControlName="shippedDate"
+            formControlName="shippeddate"
           />
           <mat-datepicker-toggle
             matSuffix
@@ -102,24 +102,24 @@
       <div class="row">
         <mat-form-field appearance="fill" class="field">
           <mat-label>Product</mat-label>
-          <input matInput type="number" formControlName="freight" />
+          <input matInput type="number" formControlName="productid" />
         </mat-form-field>
       </div>
       <div class="row">
         <mat-form-field appearance="fill" class="field">
           <span matPrefix>$</span>
           <mat-label>Unit Price</mat-label>
-          <input matInput formControlName="shipAddress" />
+          <input matInput formControlName="unitprice" />
         </mat-form-field>
 
         <mat-form-field appearance="fill" class="field">
           <mat-label>Quantity</mat-label>
-          <input matInput formControlName="shipCity" />
+          <input matInput formControlName="qty" />
         </mat-form-field>
 
         <mat-form-field appearance="fill" class="field">
           <mat-label>Discount</mat-label>
-          <input matInput formControlName="shipCountry" />
+          <input matInput formControlName="discount" />
         </mat-form-field>
       </div>
     </form>
