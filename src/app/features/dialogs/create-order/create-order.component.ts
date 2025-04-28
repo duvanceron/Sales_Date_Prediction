@@ -12,7 +12,11 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
-import { MatNativeDateModule} from '@angular/material/core';
+import {
+  MAT_DATE_FORMATS,
+  MAT_NATIVE_DATE_FORMATS,
+  provideNativeDateAdapter,
+} from '@angular/material/core';
 import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { OrderService } from 'app/core/services/order.service';
 import { ShipperService } from 'app/core/services/shipper.service';
@@ -31,12 +35,14 @@ import { CustomerDTO } from 'app/core/models/customerDTO';
     MatFormFieldModule,
     MatDatepickerModule,
     MatSelectModule,
-    MatNativeDateModule,
     MatInputModule,
     MatButtonModule,
     MatDialogModule,
   ],
-  providers:[MatDatepickerModule,MatNativeDateModule],
+  providers: [
+    provideNativeDateAdapter(),
+    { provide: MAT_DATE_FORMATS, useValue: MAT_NATIVE_DATE_FORMATS },
+  ],
   templateUrl: './create-order.component.html',
   styleUrl: './create-order.component.css',
 })
