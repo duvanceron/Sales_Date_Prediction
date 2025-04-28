@@ -37,12 +37,30 @@ mat-label {
   color: red;
   margin-right: 10px;
   text-decoration: none;
+  text-decoration: none;
+  cursor: pointer; 
+  font-size: 14px;
 }
 
+.red-button:hover {
+  /* Material red */
+  color: rgb(135, 14, 14);
+  margin-right: 10px;
+  text-decoration: none;
+  font-weight: bold; 
+}
 
 .green-button {
   /* Material green */
   color: #4caf50;
   margin-left: 10px;
   text-decoration: none;
+  cursor: pointer; 
+  font-size: 14px;
+
+}
+
+.green-button:hover {
+  color: #16871c; 
+  font-weight: bold; 
 }

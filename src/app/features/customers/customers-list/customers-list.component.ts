@@ -18,6 +18,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { HttpClientModule } from '@angular/common/http';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { OrderDialogComponent } from 'app/features/dialogs/order-dialog/order-dialog.component';
+import { CreateOrderComponent } from 'app/features/dialogs/create-order/create-order.component';
 
 @Component({
   selector: 'app-customers-list',
@@ -40,7 +41,6 @@ import { OrderDialogComponent } from 'app/features/dialogs/order-dialog/order-di
 export class CustomersListComponent implements OnInit, AfterViewInit {
   loading: boolean = true;
   displayedColumns: string[] = [
-    'custid',
     'customerName',
     'lastOrderDate',
     'nextPredictedOrder',
@@ -84,6 +84,19 @@ export class CustomersListComponent implements OnInit, AfterViewInit {
       const dialogRef = this.dialog.open(OrderDialogComponent, {
         width: '90vw',
         maxWidth: '90vw',
+        data: customer,
+      });
+
+      dialogRef.afterClosed().subscribe((result) => {});
+    }
+  }
+  createOrder(customerId: number) {
+    const customer = this.dataSource.data.find((c) => c.custid === customerId);
+    console.log(customer);
+    if (customer) {
+      const dialogRef = this.dialog.open(CreateOrderComponent, {
+        width: '70vw',
+        maxWidth: '70vw',
         data: customer,
       });
 

@@ -1,0 +1,13 @@
+<div class="chart-container">
+  <div class="header">
+    <mat-label class="labelCustomer">Source Data: </mat-label>
+    <mat-form-field class="sourceInput" appearance="outline">
+      <input matInput placeholder="Enter data (comma-separated)" [(ngModel)]="inputData" />
+    </mat-form-field>
+    <button  class="blue-background-button"  (click)="renderData()" >
+      <mat-icon>bar_chart</mat-icon> Update Data
+    </button>
+  </div>
+
+  <div class="chart" #chart></div>
+</div>

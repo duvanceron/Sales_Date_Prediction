@@ -3,10 +3,16 @@
 }
 /* styles.css o component.css */
 .dark-toolbar {
-  background-color: #333; /* Gris oscuro */
-  color: white; /* Texto blanco para contraste */
+  background-color: #333; 
+  color: white; 
 }
 .logo {
   height: 70px;
   margin-right: 16px;
+}
+.white-icon {
+  color: white; 
+}
+.white-icon:hover {
+  color: rgb(135, 14, 14);
 }

@@ -1,0 +1,141 @@
+<h4 mat-dialog-title class="labelCustomer">Customer AHPOP - New Order</h4>
+<mat-dialog-content>
+  <div class="container">
+    <form [formGroup]="orderForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <h2>Order</h2>
+      </div>
+      <div class="row">
+        <mat-form-field appearance="fill" class="field">
+          <mat-label>Employee</mat-label>
+          <mat-select formControlName="employee">
+            <mat-option *ngFor="let emp of employees" [value]="emp">{{
+              emp
+            }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="field">
+          <mat-label>Shipper</mat-label>
+          <mat-select formControlName="shipper">
+            <mat-option *ngFor="let ship of shippers" [value]="ship">{{
+              ship
+            }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="row">
+        <mat-form-field appearance="fill" class="field">
+          <mat-label>Ship Name</mat-label>
+          <input matInput formControlName="shipName" required />
+        </mat-form-field>
+      </div>
+      <div class="row">
+        <mat-form-field appearance="fill" class="field">
+          <mat-label>Ship Address</mat-label>
+          <input matInput formControlName="shipAddress" />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="field">
+          <mat-label>Ship City</mat-label>
+          <input matInput formControlName="shipCity" />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="field">
+          <mat-label>Ship Country</mat-label>
+          <input matInput formControlName="shipCountry" />
+        </mat-form-field>
+      </div>
+      <div class="row">
+        <mat-form-field appearance="fill" class="field">
+          <mat-label>Order Date</mat-label>
+          <input
+            matInput
+            [matDatepicker]="orderPicker"
+            formControlName="orderDate"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="orderPicker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #orderPicker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="field">
+          <mat-label>Required Date</mat-label>
+          <input
+            matInput
+            [matDatepicker]="requiredPicker"
+            formControlName="requiredDate"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="requiredPicker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #requiredPicker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="field">
+          <mat-label>Shipped Date</mat-label>
+          <input
+            matInput
+            [matDatepicker]="shippedPicker"
+            formControlName="shippedDate"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="shippedPicker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #shippedPicker></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="row">
+        <mat-form-field appearance="fill" class="field">
+          <span matPrefix>$</span>
+          <mat-label>Freight</mat-label>
+          <input matInput type="text" formControlName="freight" />
+        </mat-form-field>
+      </div>
+      <div class="row">
+        <h2>Order Details</h2>
+      </div>
+      <div class="row">
+        <mat-form-field appearance="fill" class="field">
+          <mat-label>Product</mat-label>
+          <input matInput type="number" formControlName="freight" />
+        </mat-form-field>
+      </div>
+      <div class="row">
+        <mat-form-field appearance="fill" class="field">
+          <span matPrefix>$</span>
+          <mat-label>Unit Price</mat-label>
+          <input matInput formControlName="shipAddress" />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="field">
+          <mat-label>Quantity</mat-label>
+          <input matInput formControlName="shipCity" />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="field">
+          <mat-label>Discount</mat-label>
+          <input matInput formControlName="shipCountry" />
+        </mat-form-field>
+      </div>
+    </form>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close style="color: rgb(10, 120, 19)">
+    CLOSE
+  </button>
+  <button
+    mat-button
+    mat-dialog-close
+    style="color: rgb(10, 120, 19)"
+    type="submit"
+  >
+    SAVE
+  </button>
+</mat-dialog-actions>
