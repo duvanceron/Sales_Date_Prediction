@@ -92,7 +92,6 @@ export class CustomersListComponent implements OnInit, AfterViewInit {
   }
   createOrder(customerId: number) {
     const customer = this.dataSource.data.find((c) => c.custid === customerId);
-    console.log(customer);
     if (customer) {
       const dialogRef = this.dialog.open(CreateOrderComponent, {
         width: '70vw',

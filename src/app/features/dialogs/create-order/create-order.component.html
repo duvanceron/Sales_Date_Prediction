@@ -18,8 +18,8 @@
         <mat-form-field appearance="fill" class="field">
           <mat-label>Shipper</mat-label>
           <mat-select formControlName="shipperid">
-            <mat-option *ngFor="let ship of shippers" [value]="ship">{{
-              ship
+            <mat-option *ngFor="let ship of shippers" [value]="ship.id">{{
+              ship.name
             }}</mat-option>
           </mat-select>
         </mat-form-field>
@@ -102,7 +102,11 @@
       <div class="row">
         <mat-form-field appearance="fill" class="field">
           <mat-label>Product</mat-label>
-          <input matInput type="number" formControlName="productid" />
+          <mat-select formControlName="productid">
+            <mat-option *ngFor="let product of products" [value]="product.id">{{
+              product.name
+            }}</mat-option>
+          </mat-select>
         </mat-form-field>
       </div>
       <div class="row">
@@ -122,20 +126,14 @@
           <input matInput formControlName="discount" />
         </mat-form-field>
       </div>
+      <div class="rowButton">
+        <button mat-button mat-dialog-close >
+          CLOSE
+        </button>
+        <button mat-button  type="submit">
+          SAVE
+        </button>
+      </div>
     </form>
   </div>
 </mat-dialog-content>
-
-<mat-dialog-actions>
-  <button mat-button mat-dialog-close style="color: rgb(10, 120, 19)">
-    CLOSE
-  </button>
-  <button
-    mat-button
-    mat-dialog-close
-    style="color: rgb(10, 120, 19)"
-    type="submit"
-  >
-    SAVE
-  </button>
-</mat-dialog-actions>

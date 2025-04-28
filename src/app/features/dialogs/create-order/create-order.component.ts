@@ -26,6 +26,8 @@ import {
 import { OrderService } from 'app/core/services/order.service';
 import { orderWithDetailDTO } from 'app/core/models/orderWithDetailDTO';
 import { CustomerDTO } from 'app/core/models/customerDTO';
+import { NgModule } from '@angular/core';
+
 @Component({
   selector: 'app-create-order',
   imports: [
@@ -39,6 +41,7 @@ import { CustomerDTO } from 'app/core/models/customerDTO';
     MatButtonModule,
     MatDialogModule,
   ],
+  providers: [MatDatepickerModule],
   templateUrl: './create-order.component.html',
   styleUrl: './create-order.component.css',
 })
@@ -46,7 +49,23 @@ export class CreateOrderComponent {
   orderForm: FormGroup;
   customer: CustomerDTO;
   employees: { id: number; name: string }[] = [];
-  shippers = ['Shipper GVSUA', 'Shipper ETYNR', 'Shipper ZHISN'];
+  shippers = [
+    { id: 1, name: 'Shipper GVSUA' },
+    { id: 2, name: 'Shipper ETYNR' },
+    { id: 3, name: 'Shipper ZHISN' },
+  ];
+  products = [
+    { id: 1, name: 'Product HHYDP' },
+    { id: 2, name: 'Product RECZE' },
+    { id: 3, name: 'Product IMEHJ' },
+    { id: 4, name: 'Product KSBRM' },
+    { id: 5, name: 'Product EPEIM' },
+    { id: 6, name: 'Product VAIIV' },
+    { id: 7, name: 'Product HMLNI' },
+    { id: 8, name: 'Product WVJFP' },
+    { id: 9, name: 'Product AOZBW' },
+    { id: 10, name: 'Product YHXGE' },
+  ];
   constructor(
     private fb: FormBuilder,
     private orderService: OrderService,
@@ -67,7 +86,6 @@ export class CreateOrderComponent {
       shippeddate: ['', Validators.required],
       freight: ['', Validators.required],
       shipcountry: ['', Validators.required],
-      orderid: ['', Validators.required],
       productid: ['', Validators.required],
       unitprice: ['', Validators.required],
       qty: ['', Validators.required],
@@ -76,8 +94,10 @@ export class CreateOrderComponent {
   }
 
   onSubmit() {
+    console.log('enter');
     if (this.orderForm.valid) {
       const order: orderWithDetailDTO = this.orderForm.value;
+      console.log(order);
       this.orderService.createOrder(order).subscribe({
         next: (response) => {
           console.log('Created Successfully', response);
