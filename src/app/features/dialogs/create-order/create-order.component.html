@@ -9,8 +9,8 @@
         <mat-form-field appearance="fill" class="field">
           <mat-label>Employee</mat-label>
           <mat-select formControlName="empid">
-            <mat-option *ngFor="let emp of employees" [value]="emp.id">{{
-              emp.name
+            <mat-option *ngFor="let emp of employees" [value]="emp.empid">{{
+              emp.nameEmployee
             }}</mat-option>
           </mat-select>
         </mat-form-field>
@@ -18,8 +18,8 @@
         <mat-form-field appearance="fill" class="field">
           <mat-label>Shipper</mat-label>
           <mat-select formControlName="shipperid">
-            <mat-option *ngFor="let ship of shippers" [value]="ship.id">{{
-              ship.name
+            <mat-option *ngFor="let ship of shippers" [value]="ship.shipperid">{{
+              ship.companyname
             }}</mat-option>
           </mat-select>
         </mat-form-field>
@@ -53,6 +53,7 @@
             matInput
             [matDatepicker]="orderPicker"
             formControlName="orderdate"
+            type="text"
           />
           <mat-datepicker-toggle
             matSuffix
@@ -103,8 +104,8 @@
         <mat-form-field appearance="fill" class="field">
           <mat-label>Product</mat-label>
           <mat-select formControlName="productid">
-            <mat-option *ngFor="let product of products" [value]="product.id">{{
-              product.name
+            <mat-option *ngFor="let product of products" [value]="product.productid">{{
+              product.productname
             }}</mat-option>
           </mat-select>
         </mat-form-field>
@@ -127,10 +128,10 @@
         </mat-form-field>
       </div>
       <div class="rowButton">
-        <button mat-button mat-dialog-close >
+        <button mat-button mat-dialog-close style="color: rgb(8, 141, 19)">
           CLOSE
         </button>
-        <button mat-button  type="submit">
+        <button mat-button type="submit" style="color: rgb(8, 141, 19)">
           SAVE
         </button>
       </div>

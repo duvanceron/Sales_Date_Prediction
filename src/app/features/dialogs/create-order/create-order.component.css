@@ -29,7 +29,6 @@ h2 {
 .rowButton {
   display: flex;
   justify-content: flex-end;
-  color: rgb(10, 120, 19);
   gap: 10px;
   margin-top: 20px;
 }
