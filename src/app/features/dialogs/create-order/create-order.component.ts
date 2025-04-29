@@ -24,6 +24,7 @@ import { ProductService } from 'app/core/services/product.service';
 import { EmployeeService } from 'app/core/services/employee.service';
 import { orderWithDetailDTO } from 'app/core/models/orderWithDetailDTO';
 import { CustomerDTO } from 'app/core/models/customerDTO';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-create-order',
@@ -59,6 +60,7 @@ export class CreateOrderComponent implements OnInit {
     private shipperService: ShipperService,
     private productService: ProductService,
     private employeeService: EmployeeService,
+    private snackBar: MatSnackBar,
     @Inject(MAT_DIALOG_DATA) public data: CustomerDTO
   ) {
     this.customer = data;
@@ -72,29 +74,29 @@ export class CreateOrderComponent implements OnInit {
         '',
         [
           Validators.required,
-          Validators.pattern('^(0[1-9]|1[0-2])/(0[1-9]|[12][0-9]|3[01])/d{4}$'),
+          // Validators.pattern('^(0[1-9]|1[0-2])/(0[1-9]|[12][0-9]|3[01])/d{4}$'),
         ],
       ],
       requireddate: [
         '',
         [
           Validators.required,
-          Validators.pattern('^(0[1-9]|1[0-2])/(0[1-9]|[12][0-9]|3[01])/d{4}$'),
+          // Validators.pattern('^(0[1-9]|1[0-2])/(0[1-9]|[12][0-9]|3[01])/d{4}$'),
         ],
       ],
       shippeddate: [
         '',
         [
           Validators.required,
-          Validators.pattern('^(0[1-9]|1[0-2])/(0[1-9]|[12][0-9]|3[01])/d{4}$'),
+          // Validators.pattern('^(0[1-9]|1[0-2])/(0[1-9]|[12][0-9]|3[01])/d{4}$'),
         ],
       ],
-      freight: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
+      freight: ['', [Validators.required, Validators.pattern('^[0-9]+(\.[0-9]+)?$')]],
       shipcountry: ['', Validators.required],
       productid: ['', Validators.required],
-      unitprice: ['',[ Validators.required, Validators.pattern('^[0-9]*$')]],
-      qty: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
-      discount: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
+      unitprice: ['', [Validators.required,  Validators.pattern('^[0-9]+(\.[0-9]+)?$')]],
+      qty: ['', [Validators.required,  Validators.pattern('^[0-9]+(\.[0-9]+)?$')]],
+      discount: ['', [Validators.required,  Validators.pattern('^[0-9]+(\.[0-9]+)?$')]],
     });
   }
   ngOnInit(): void {
@@ -104,21 +106,21 @@ export class CreateOrderComponent implements OnInit {
   }
 
   onSubmit() {
-    const order: orderWithDetailDTO = this.orderForm.value;
-    console.log(order);
     if (this.orderForm.valid) {
       const order: orderWithDetailDTO = this.orderForm.value;
 
       this.orderService.createOrder(order).subscribe({
         next: (response) => {
-          console.log('Created Successfully', response);
+          if (response.success) {
+            this.showMessage(response.message);
+          }
         },
         error: (error) => {
-          console.error('Error Creating Order', error);
+          this.showMessage(error.message);
         },
       });
     } else {
-      console.error('Form Invalid');
+      this.showMessage("Datos invalidos! Por favor revisar los datos ingresados");
     }
   }
   loadShippers() {
@@ -151,5 +153,13 @@ export class CreateOrderComponent implements OnInit {
         console.error('Error loading employees', error);
       }
     );
+  }
+  showMessage(message: string) {
+    this.snackBar.open(message, 'Close', {
+      duration: 3000, // Duration in milliseconds
+      verticalPosition: 'bottom', // Optional: position of snack bar
+      horizontalPosition: 'right', // Optional: position of snack bar
+      panelClass: ['error-snackbar'], // Optional: custom styling
+    });
   }
 }
