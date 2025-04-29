@@ -68,15 +68,33 @@ export class CreateOrderComponent implements OnInit {
       shipname: ['', Validators.required],
       shipaddress: ['', Validators.required],
       shipcity: ['', Validators.required],
-      orderdate: ['', Validators.required],
-      requireddate: ['', Validators.required],
-      shippeddate: ['', Validators.required],
-      freight: ['', Validators.required],
+      orderdate: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern('^(0[1-9]|1[0-2])/(0[1-9]|[12][0-9]|3[01])/d{4}$'),
+        ],
+      ],
+      requireddate: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern('^(0[1-9]|1[0-2])/(0[1-9]|[12][0-9]|3[01])/d{4}$'),
+        ],
+      ],
+      shippeddate: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern('^(0[1-9]|1[0-2])/(0[1-9]|[12][0-9]|3[01])/d{4}$'),
+        ],
+      ],
+      freight: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
       shipcountry: ['', Validators.required],
       productid: ['', Validators.required],
-      unitprice: ['', Validators.required],
-      qty: ['', Validators.required],
-      discount: ['', Validators.required],
+      unitprice: ['',[ Validators.required, Validators.pattern('^[0-9]*$')]],
+      qty: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
+      discount: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
     });
   }
   ngOnInit(): void {
