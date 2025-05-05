@@ -22,6 +22,7 @@ import { OrderService } from 'app/core/services/order.service';
 import { ShipperService } from 'app/core/services/shipper.service';
 import { ProductService } from 'app/core/services/product.service';
 import { EmployeeService } from 'app/core/services/employee.service';
+import { FormErrorService } from 'app/core/services/form-error.service';
 import { orderWithDetailDTO } from 'app/core/models/orderWithDetailDTO';
 import { CustomerDTO } from 'app/core/models/customerDTO';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -60,6 +61,7 @@ export class CreateOrderComponent implements OnInit {
     private shipperService: ShipperService,
     private productService: ProductService,
     private employeeService: EmployeeService,
+    private formErrorService: FormErrorService,
     private snackBar: MatSnackBar,
     @Inject(MAT_DIALOG_DATA) public data: CustomerDTO
   ) {
@@ -74,7 +76,7 @@ export class CreateOrderComponent implements OnInit {
         '',
         [
           Validators.required,
-          // Validators.pattern('^(0[1-9]|1[0-2])/(0[1-9]|[12][0-9]|3[01])/d{4}$'),
+          Validators.pattern('^([0-9]{1,2})/([0-9]{1,2})/\\d{4}$'),
         ],
       ],
       requireddate: [
@@ -91,12 +93,24 @@ export class CreateOrderComponent implements OnInit {
           // Validators.pattern('^(0[1-9]|1[0-2])/(0[1-9]|[12][0-9]|3[01])/d{4}$'),
         ],
       ],
-      freight: ['', [Validators.required, Validators.pattern('^[0-9]+(\.[0-9]+)?$')]],
+      freight: [
+        '',
+        [Validators.required, Validators.pattern('^[0-9]+(.[0-9]+)?$')],
+      ],
       shipcountry: ['', Validators.required],
       productid: ['', Validators.required],
-      unitprice: ['', [Validators.required,  Validators.pattern('^[0-9]+(\.[0-9]+)?$')]],
-      qty: ['', [Validators.required,  Validators.pattern('^[0-9]+(\.[0-9]+)?$')]],
-      discount: ['', [Validators.required,  Validators.pattern('^[0-9]+(\.[0-9]+)?$')]],
+      unitprice: [
+        '',
+        [Validators.required, Validators.pattern('^[0-9]+(.[0-9]+)?$')],
+      ],
+      qty: [
+        '',
+        [Validators.required, Validators.pattern('^[0-9]+(.[0-9]+)?$')],
+      ],
+      discount: [
+        '',
+        [Validators.required, Validators.pattern('^[0-9]+(.[0-9]+)?$')],
+      ],
     });
   }
   ngOnInit(): void {
@@ -120,7 +134,9 @@ export class CreateOrderComponent implements OnInit {
         },
       });
     } else {
-      this.showMessage("Datos invalidos! Por favor revisar los datos ingresados");
+      this.showMessage(
+        'Datos invalidos! Por favor revisar los datos ingresados'
+      );
     }
   }
   loadShippers() {
@@ -161,5 +177,12 @@ export class CreateOrderComponent implements OnInit {
       horizontalPosition: 'right', // Optional: position of snack bar
       panelClass: ['error-snackbar'], // Optional: custom styling
     });
+  }
+
+  verifyData(field: string) {
+    return this.formErrorService.getErrorMessage(
+      this.orderForm.get(field),
+      field
+    );
   }
 }

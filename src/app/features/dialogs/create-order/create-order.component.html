@@ -13,21 +13,32 @@
               emp.nameEmployee
             }}</mat-option>
           </mat-select>
+          <mat-error *ngIf="orderForm.invalid">
+            {{ verifyData('empid') }}
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="fill" class="field">
           <mat-label>Shipper</mat-label>
           <mat-select formControlName="shipperid">
-            <mat-option *ngFor="let ship of shippers" [value]="ship.shipperid">{{
-              ship.companyname
-            }}</mat-option>
+            <mat-option
+              *ngFor="let ship of shippers"
+              [value]="ship.shipperid"
+              >{{ ship.companyname }}</mat-option
+            >
           </mat-select>
+          <mat-error *ngIf="orderForm.invalid">
+            {{ verifyData('shipperid') }}
+          </mat-error>
         </mat-form-field>
       </div>
       <div class="row">
         <mat-form-field appearance="fill" class="field">
           <mat-label>Ship Name</mat-label>
           <input matInput formControlName="shipname" required />
+          <mat-error *ngIf="orderForm.invalid">
+            {{ verifyData('shipname') }}
+          </mat-error>
         </mat-form-field>
       </div>
       <div class="row">
@@ -55,11 +66,15 @@
             formControlName="orderdate"
             type="text"
           />
+          <mat-hint>MMMM DD, YYYY</mat-hint>
           <mat-datepicker-toggle
             matSuffix
             [for]="orderPicker"
           ></mat-datepicker-toggle>
           <mat-datepicker #orderPicker></mat-datepicker>
+          <mat-error *ngIf="orderForm.invalid">
+            {{ verifyData('orderdate') }}
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="fill" class="field">
@@ -104,9 +119,11 @@
         <mat-form-field appearance="fill" class="field">
           <mat-label>Product</mat-label>
           <mat-select formControlName="productid">
-            <mat-option *ngFor="let product of products" [value]="product.productid">{{
-              product.productname
-            }}</mat-option>
+            <mat-option
+              *ngFor="let product of products"
+              [value]="product.productid"
+              >{{ product.productname }}</mat-option
+            >
           </mat-select>
         </mat-form-field>
       </div>
@@ -125,13 +142,21 @@
         <mat-form-field appearance="fill" class="field">
           <mat-label>Discount</mat-label>
           <input type="number" matInput formControlName="discount" />
+          <mat-error *ngIf="orderForm.invalid">
+            {{ verifyData('discount') }}
+          </mat-error>
         </mat-form-field>
       </div>
       <div class="rowButton">
         <button mat-button mat-dialog-close style="color: rgb(8, 141, 19)">
           CLOSE
         </button>
-        <button mat-button type="submit" style="color: rgb(8, 141, 19)">
+        <button
+          mat-button
+          type="submit"
+          [ngStyle]="orderForm.invalid ? {} : { color: 'rgb(8, 141, 19)' }"
+          [disabled]="orderForm.invalid"
+        >
           SAVE
         </button>
       </div>
